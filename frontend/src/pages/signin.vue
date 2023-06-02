@@ -62,13 +62,15 @@ export default {
     // サインインの送信処理
     async submit() {
       const response = await this.$axios.$post(
-        `${this.$config.apiBaseUrl}/auth/signin`,
-        this.formValue
+        // `http://localhost:3001/auth/signin`, 
+        `${this.$config.apiBaseUrl}/auth/signin`, 
+        this.formValue                            
       )
       console.log('サインインAPI結果', response)
 
       // トークンの有無でログインできたか判断
       const hasToken = !!response.token
+      
       if (hasToken) {
         // 成功
 
