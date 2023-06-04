@@ -14,6 +14,8 @@ router.post('/signin', async (req, res, next) => {
     // リクエストパラメーター
     const { email, password } = req.body;
 
+    console.log(req.body);
+
     // ユーザー存在チェックを行う
     const resSearchUser = await userService.searchUser('', '', email, password);
 
@@ -28,8 +30,7 @@ router.post('/signin', async (req, res, next) => {
       email: email,
       token: resCreateToken,
     };
-
-    res.status(200).json(body);
+    res.status(200).json(body); //この記述がないとフロントが作動しない
   } catch (error) {
     console.error(error);
     res.status(500).json({});

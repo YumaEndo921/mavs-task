@@ -1,5 +1,6 @@
 'use strict';
 import { Model } from 'sequelize';
+
 const createModel = (sequelize, DataTypes) => {
   class users extends Model {
     /**
@@ -13,6 +14,12 @@ const createModel = (sequelize, DataTypes) => {
   }
   users.init(
     {
+      id: {
+        allowNull: true,
+        type: DataTypes.INTEGER,
+        primaryKey: true, // 主キーとしてマークする
+        autoIncrement: true
+      },
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,

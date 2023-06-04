@@ -1,7 +1,8 @@
 {
   "username": "root",
   "password": "root",
-  "database": "mavs-task-db",
+  "database": "postgres",
   "host": "postgres",
   "dialect": "postgres"
 }
+

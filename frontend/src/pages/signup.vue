@@ -111,6 +111,7 @@ export default {
       await this.$axios.post(
         `${this.$config.apiBaseUrl}/users/createUser`,
          this.formValue)
+        
 
          console.log('サインアップAPI結果', response)
 
