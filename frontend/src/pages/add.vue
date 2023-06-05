@@ -1,14 +1,56 @@
 <template>
     <div class="add">
         <h2 class="add__ttl">Memo Add</h2>
-        <inputMemo class="add__input" />
-        <button class="add__btn">保存</button>
+            <inputMemo class="add__input" />
+            <!-- <button class="add__btn" type="submit">保存</button> -->
         <div class="add__box">
         <nuxt-link class="add__back"  to="/">戻る</nuxt-link>
         </div>
-        
     </div>
 </template>
+
+<script>
+// export default {
+//   data() {
+//     // return {
+//     //   formValue: {
+//     //     title: '',
+//     //     content: '',
+//     //   },
+//     // }
+//   },
+//   methods: {
+//     // 新規登録の送信処理
+//     async submit() {
+//       console.log('this.formValue', this.formValue)
+
+//       // axiosで新規登録処理
+//       // await this.$axios.post('新規登録用API', this.formValue)
+//       const response = await this.$axios.post(
+//         `${this.$config.apiBaseUrl}/articles/add`,
+//          this.formValue)
+
+//          console.log('サインアップAPI結果', response)
+
+//       const responseCode = 200 // 404
+//       if (responseCode === 200) {
+//         // 成功
+
+//         // トップにリダイレクト
+//         this.$router.push('/')
+//       } else {
+//         // 失敗
+
+//         // トースト表示
+//         this.$toast.global.error({
+//           message: '新規登録できませんでした。もう一度お試しください',
+//         })
+//       }
+//     },
+//   },
+// }
+</script>
+
 
 <style lang="scss" scoped>
 .add{

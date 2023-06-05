@@ -141,7 +141,7 @@ export default {
     font-weight: normal;
   }
 }
-.-username{
+.-email{
   padding-bottom: 10px;
 }
 .-email{

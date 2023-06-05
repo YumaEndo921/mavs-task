@@ -14,6 +14,7 @@ const authenticate = function authenticate(req, res, next) {
     req.jwtPayload = decoded;
     next();
   } catch (err) {
+    console.log(err);
     return res.status(401).json({
       message: 'Not authenticated',
     });

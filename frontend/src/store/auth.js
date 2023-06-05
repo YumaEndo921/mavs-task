@@ -11,3 +11,8 @@ export const mutations = {
     state.username = username
   },
 }
+export const getters = {
+  hoge: state => {
+    return state.token
+  },
+ }
