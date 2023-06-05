@@ -64,7 +64,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-content: center;
-  padding-bottom: 107px; //ログイン後値を変更
+  padding-bottom: 20px; //ログイン後値を変更
   font-size: 24px;
 }
 
