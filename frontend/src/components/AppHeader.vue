@@ -1,15 +1,15 @@
 <template>
   <!-- アプリケーションの共通ヘッダー -->
-  <header class="header">
-    <h1>
-      <nuxt-link to="/">メモアプリ</nuxt-link>
+  <header  v-bind:class="[isLogin ? 'headerLogin' : 'header']">
+    <h1 class="header__ttl">
+      <nuxt-link to="/">MemoApp</nuxt-link>
     </h1>
     <div>
       <div v-if="isLogin">
         <p>{{ username }}</p>
-        <button type="button" @click="logout">ログアウト</button>
+        <button type="button" @click="logout"><nuxt-link to="/">ログアウト</nuxt-link></button>
       </div>
-      <div v-else>
+      <div v-else class="header__link">
         <nuxt-link to="/signin">サインイン</nuxt-link>
         <nuxt-link to="/signup">新規登録</nuxt-link>
       </div>
@@ -20,6 +20,7 @@
 <script>
 export default {
   name: 'AppHeader',
+  
   computed: {
     // Tokenの有無でログインしているかどうかを判断
     isLogin() {
@@ -45,5 +46,26 @@ export default {
   display: flex;
   justify-content: space-between;
   align-content: center;
+  padding-bottom: 216px; //ログイン後値を変更
+  font-size: 24px;
+  &__ttl{
+    padding-top: 30px;
+    padding-left: 34px;
+    font-size: 24px;
+    font-weight: normal;
+  }
+  &__link{
+    padding-top: 30px;
+    padding-right: 34px;
+    font-size: 24px;
+  }
 }
+.headerLogin{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding-bottom: 107px; //ログイン後値を変更
+  font-size: 24px;
+}
+
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>新規登録</h2>
+  <div class="signup">
+    <h2 class="signup__ttl">新規登録</h2>
     <ValidationObserver ref="obs" v-slot="{ handleSubmit }">
       <form class="form_main" @submit.prevent="handleSubmit(submit)">
         <ValidationProvider
@@ -108,13 +108,10 @@ export default {
 
       // axiosで新規登録処理
       // await this.$axios.post('新規登録用API', this.formValue)
-      await this.$axios.post(
-        `${this.$config.apiBaseUrl}/users/createUser`,
+      const response = await this.$axios.post(
+        `${this.$config.apiBaseUrl}/users/signup`,
          this.formValue)
-        
-
          console.log('サインアップAPI結果', response)
-
 
       const responseCode = 200 // 404
       if (responseCode === 200) {
@@ -136,6 +133,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.signup{
+  text-align: center;
+  &__ttl{
+    padding-bottom: 64px;
+    font-size: 64px;
+    font-weight: normal;
+  }
+}
+.-username{
+  padding-bottom: 10px;
+}
+.-email{
+  padding-bottom: 10px;
+}
+.-password{
+  padding-bottom: 10px;
+}
 .error {
   color: #ff0000;
 }

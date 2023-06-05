@@ -11,31 +11,29 @@ const authService = new AuthService();
 /**
  * ユーザー新規登録
  */
-router.post('/createUser', async (req, res, next) => {  
+router.post('/signup', async (req, res, next) => {  
 
-  const {username, email, password } = req.body;
-  const hash_password = authService.hashSha256(password)
-  console.log(hash_password)
-
-  const newUser = await db.Users.create({
-    name: username,
-    email: email,
-    password: hash_password,
-  });
-
-
-
-  console.log("データベースに追加しました")
-  // console.log(username,email,password); //インプット情報を取得できた
-//   try {
-//     let res = {};
-
-//     const body = {};
-//     res.status(200).json(body);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json(body);
-//   }
+  
+  try {
+    
+    
+    const {username, email, password } = req.body;
+    const hash_password = authService.hashSha256(password)
+    // console.log(hash_password)
+  
+    const newUser = await db.Users.create({
+      name: username,
+      email: email,
+      password: hash_password,
+    });
+  
+    console.log("データベースに追加しました")
+    const body = {};
+    res.status(200).json(body);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({});
+  }
 }
 );
 /**

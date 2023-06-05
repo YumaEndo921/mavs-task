@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>サインイン</h2>
+  <div class="signin">
+    <h2 class="signin__ttl">サインイン</h2>
     <ValidationObserver ref="obs" v-slot="{ handleSubmit }">
       <form class="form_main" @submit.prevent="handleSubmit(submit)">
         <ValidationProvider
@@ -38,6 +38,7 @@
           <div class="error">{{ errors[0] }}</div>
         </ValidationProvider>
         <button
+          class="-submit"
           type="submit"
           :disabled="!formValue.email || !formValue.password"
         >
@@ -98,6 +99,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.signin{
+  text-align: center;
+  &__ttl{
+    padding-bottom: 104px;
+    font-size: 64px;
+    font-weight: normal;
+  }
+}
+.-email{
+  padding-bottom: 10px;
+}
+.-password{
+  padding-bottom: 64px;
+}
+.-submit{
+  width: 240px;
+  height: 60px;
+  font-size: 24px;
+}
+button{
+  border: none;
+}
+input{
+  width: 240px;
+}
+
 .error {
   color: #ff0000;
 }
