@@ -5,7 +5,7 @@
       <nuxt-link to="/">MemoApp</nuxt-link>
     </h1>
     <div>
-      <div v-if="isLogin">
+      <div v-if="isLogin" class="headerLogin__link">
         <p>{{ username }}</p>
         <button type="button" @click="logout"><nuxt-link to="/">ログアウト</nuxt-link></button>
       </div>
@@ -42,6 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -66,6 +67,14 @@ export default {
   align-content: center;
   padding-bottom: 20px; //ログイン後値を変更
   font-size: 24px;
+  &__link{
+    padding-top: 30px;
+    padding-right: 34px;
+    font-size: 24px;
+  }
 }
-
+button{
+  border: none;
+  background: none;
+}
 </style>
