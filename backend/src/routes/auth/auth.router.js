@@ -12,9 +12,7 @@ const authService = new AuthService();
 router.post('/signin', async (req, res, next) => {
   try {
     // リクエストパラメーター
-    const { email, password } = req.body;
-
-    console.log(req.body);
+    const { email , password } = req.body;
 
     // ユーザー存在チェックを行う
     const resSearchUser = await userService.searchUser('', '', email, password);
@@ -24,7 +22,7 @@ router.post('/signin', async (req, res, next) => {
     //整数化する
     const id = parseInt(idRaw[0]);
 
-    console.log(`取得したidデータです${id}`);
+    // console.log(`取得したidデータです${id}`);
 
     // パラメータ存在しない場合は再ログインを促すため、空で返却する
     if (!resSearchUser.length) return res.status(200).json({});

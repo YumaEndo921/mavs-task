@@ -90,7 +90,7 @@ export default {
         display: flex;
         flex-direction: column;
         // justify-content: start;
-        align-items: start;
+        align-items: flex-start;
         
         &--box{
             width: 100%;

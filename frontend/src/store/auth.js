@@ -2,6 +2,7 @@ export const state = () => ({
   token: null,
   username: null,
   id:null,
+  memo:null,
 })
 
 export const mutations = {
@@ -13,5 +14,8 @@ export const mutations = {
   },
   setUserId(state, id) {
     state.id = id
+  },
+  setUserMemo(state, memo) {
+    state.memo = memo
   },
 }

@@ -8,11 +8,12 @@
           <nuxt-link class="indexLogin__box--button" to="/add">新規作成</nuxt-link>
         </div>
         <ul class="indexLogin__table">
-          <li class="indexLogin__table--list">
-              <nuxt-link class="indexLogin__table--ttl" to="/edit">サンプルタイトル</nuxt-link>
+          <li class="indexLogin__table--list"  v-for="item in items" :key="item.id">
+              <nuxt-link class="indexLogin__table--ttl" to="/edit">{{ item.title }}</nuxt-link>
             <div class="indexLogin__table--del">削除</div>
           </li>
         </ul>
+        <!-- <p>{{ posts }}</p> -->
       </div>
     <!-- ログイン前 -->
       <div v-else class="index">
@@ -28,12 +29,35 @@
 <script>
 export default {
   name: 'AppHeader',
+
   computed: {
     // Tokenの有無でログインしているかどうかを判断
     isLogin() {
       return !!this.$store.state.auth.token
     },
+    getUserId(){
+    return this.$store.state.auth.id
+   },
+    items() {
+    return this.$store.state.auth.memo
+  }
   },
+  async fetch() {
+    //     // メモ情報の取得
+    try {
+    const response = await this.$axios.$post(
+      `${this.$config.apiBaseUrl}/articles/get`,
+      { params: this.getUserId })
+    await this.$store.commit('auth/setUserMemo', response.body)
+  } 
+    catch (error) {
+    // エラーメッセージの表示やログ出力など、エラー処理を行う
+    // console.error('APIリクエストエラー:', error)
+    // 必要に応じてユーザーにエラーメッセージを表示するなどの処理を追加
+    return
+  }
+  }
+
 }
 </script>
 
@@ -93,10 +117,11 @@ export default {
       justify-content: center;
       align-items: center;
       gap: 64px;
+      margin-bottom: 15px;
     }
     &--ttl{
       display: flex;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
       width: 653px;
       height: 70px;

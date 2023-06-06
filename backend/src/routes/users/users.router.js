@@ -1,12 +1,9 @@
 import AuthService from '../../services/auth/AuthService.js';
-import UserService from '../../services/users/UserService.js';
 import db from '../../models/index.js';
 import express from 'express';
 
 const router = express.Router();
 const authService = new AuthService();
-// const userService = new UserService();
-
 
 /**
  * ユーザー新規登録
@@ -15,8 +12,6 @@ router.post('/signup', async (req, res, next) => {
 
   
   try {
-    
-    
     const {username, email, password } = req.body;
     const hash_password = authService.hashSha256(password)
     // console.log(hash_password)

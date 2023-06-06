@@ -62,11 +62,8 @@ export default {
   methods: {
     // サインインの送信処理
     async submit() {
-      const response = await this.$axios.$post(
-        // `http://localhost:3001/auth/signin`, 
-        `${this.$config.apiBaseUrl}/auth/signin`, 
-        this.formValue                            
-      )
+      const response = await this.$axios.$post(`${this.$config.apiBaseUrl}/auth/signin`,
+      this.formValue)
       console.log('サインインAPI結果', response)
 
       // トークンの有無でログインできたか判断
@@ -74,7 +71,7 @@ export default {
       
       if (hasToken) {
         // 成功
-        console.log(response.userId)
+        // console.log(response.userId)
         // Vuexストアにユーザー情報保存
         this.$store.commit('auth/setToken', response.token)
         this.$store.commit('auth/setUsername', response.email)

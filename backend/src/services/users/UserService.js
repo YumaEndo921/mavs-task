@@ -14,7 +14,7 @@ class UserService {
   async getUser(user_id) {
     // ユーザーIDをキーにユーザー情報を取得する
     const rows = await db.Users.findOne({ where: { id: user_id } });
-    console.log(rows.dataValues);
+    // console.log(rows.dataValues);
     // 取得したデータを返却形式に整形して格納し返却する
     const resData = {
       id: rows.dataValues.id,
