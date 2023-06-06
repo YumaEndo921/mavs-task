@@ -1,8 +1,7 @@
 <template>
     <div class="edit">
         <h2 class="edit__ttl">Memo Edit</h2>
-        <inputMemo class="edit__input" />
-        <button class="edit__btn">更新</button>
+        <inputMemo send="更新" class="edit__input" />
         <div class="edit__box">
         <nuxt-link class="edit__back"  to="/">戻る</nuxt-link>
         </div>
