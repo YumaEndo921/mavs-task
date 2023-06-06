@@ -1,6 +1,8 @@
 
 
 <script>
+import { mapMutations } from 'vuex'
+
 	export default {
 		async asyncData({ $axios }) {
 			// 取得先のURL

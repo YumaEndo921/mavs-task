@@ -8,9 +8,11 @@ const router = express.Router();
 /**
  * メモ新規登録
  */
-router.post('/add', authenticate, async (req, res, next) => {
+router.post('/add',  async (req, res, next) => {
 
   const {title, contents } = req.body;
+  
+  // console.log( req.headers["authorization"])
   console.log("メモ情報を受け取りました")
   
     // const newUser = await db.Users.create({

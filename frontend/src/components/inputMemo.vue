@@ -31,15 +31,21 @@ export default {
       },
     }
   },
+  computed: {
+   getToken () {
+     return this.$store.state.auth.token
+   }
+ },
   methods: {
     // 新規メモ登録の送信処理
     async submit() {
       console.log('this.formValue', this.formValue)
+    //   console.log(this.getToken)
 
       // axiosで新規登録処理
       const response = await this.$axios.post(
         `${this.$config.apiBaseUrl}/articles/add`,
-        { headers: { Authorization: "JWT " + mutations.token } }, //追記
+        { headers: { Authorization: "JWT " + this.getToken } },
          this.formValue)
 
          console.log('サインアップAPI結果', response)

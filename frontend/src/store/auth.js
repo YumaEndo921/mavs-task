@@ -11,8 +11,8 @@ export const mutations = {
     state.username = username
   },
 }
-export const getters = {
-  hoge: state => {
-    return state.token
-  },
- }
+// export const getters = {
+//   useToken: state => {
+//     return state.token
+//   },
+//  }

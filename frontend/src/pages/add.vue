@@ -5,12 +5,16 @@
             <!-- <button class="add__btn" type="submit">保存</button> -->
         <div class="add__box">
         <nuxt-link class="add__back"  to="/">戻る</nuxt-link>
+        <!-- <p>{{ getToken }}</p> -->
         </div>
     </div>
 </template>
 
 <script>
-// export default {
+import { mapMutations } from 'vuex'
+export default {
+
+
 //   data() {
 //     // return {
 //     //   formValue: {
@@ -19,6 +23,11 @@
 //     //   },
 //     // }
 //   },
+  computed: {
+   getToken () {
+     return this.$store.state
+   }
+ },
 //   methods: {
 //     // 新規登録の送信処理
 //     async submit() {
@@ -48,7 +57,7 @@
 //       }
 //     },
 //   },
-// }
+}
 </script>
 
 
