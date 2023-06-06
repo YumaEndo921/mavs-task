@@ -53,6 +53,7 @@ class UserService {
 
     // 取得したデータを返却形式に整形して格納し返却する
     const resDataList = [];
+
     for (const row of rows) {
       const resData = {
         id: row.dataValues.id,
@@ -62,7 +63,8 @@ class UserService {
       // 返却用リストへ格納する
       resDataList.push(resData);
     }
-
+    
+    
     return resDataList;
   }
 }

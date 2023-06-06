@@ -13,6 +13,12 @@ const createModel = (sequelize, DataTypes) => {
   }
   articles.init(
     {
+      id: {
+        allowNull: true,
+        type: DataTypes.INTEGER,
+        primaryKey: true, // 主キーとしてマークする
+        autoIncrement: true
+      },
       title: DataTypes.STRING,
       content: DataTypes.STRING,
       author_id: DataTypes.STRING,

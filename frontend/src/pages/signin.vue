@@ -74,10 +74,11 @@ export default {
       
       if (hasToken) {
         // 成功
-
+        console.log(response.userId)
         // Vuexストアにユーザー情報保存
         this.$store.commit('auth/setToken', response.token)
         this.$store.commit('auth/setUsername', response.email)
+        this.$store.commit('auth/setUserId', response.userId)
         // Topにリダイレクト
         this.$router.push('/')
       } else {

@@ -1,6 +1,7 @@
 export const state = () => ({
   token: null,
   username: null,
+  id:null,
 })
 
 export const mutations = {
@@ -10,9 +11,7 @@ export const mutations = {
   setUsername(state, username) {
     state.username = username
   },
+  setUserId(state, id) {
+    state.id = id
+  },
 }
-// export const getters = {
-//   useToken: state => {
-//     return state.token
-//   },
-//  }

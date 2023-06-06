@@ -1,6 +1,7 @@
 import articleService from '../../services/articles/ArticleService.js';
 import express from 'express';
 import authenticate from '../../middleware/authenticate.js';
+import db from '../../models/index.js';
 
 const router = express.Router();
 // const articleservice = new articleService();
@@ -8,27 +9,26 @@ const router = express.Router();
 /**
  * メモ新規登録
  */
-router.post('/add',  async (req, res, next) => {
+router.post('/add', authenticate, async (req, res, next) => {
 
-  const {title, contents } = req.body;
+  try {
+    // let body = {};
+    const title = req.body.params.title;     //フロントから受け取ったタイトル名
+    const contents = req.body.params.content;  //フロントから受け取ったテキスト内容
+    const userId = req.body.params.userId;  //フロントから受け取ったテキスト内容
   
-  // console.log( req.headers["authorization"])
-  console.log("メモ情報を受け取りました")
-  
-    // const newUser = await db.Users.create({
-    //   name: username,
-    //   email: email,
-    //   password: hash_password,
-    // });
-
-  // try {
-  //   let body = {};
-
-  //   res.status(200).json(body);
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({});
-  // }
+    const newUser = await db.Articles.create({
+      title: title,
+      content: contents,
+      author_id: userId,    
+    });
+    console.log("データベースに情報を追加しました");
+    
+    res.status(200).json({});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({});
+  }
 });
 
 export default router;
