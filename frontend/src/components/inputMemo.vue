@@ -1,6 +1,6 @@
 <template>
    <div class="input">
-        <form class="input__form" @submit.prevent="submit()">
+        <form class="input__form" @submit.prevent="childEvent">
             <div class="input__form--box">
                 <input 
                 class="input__form--ttl" 
@@ -47,38 +47,12 @@ export default {
     return this.$store.state.auth.id
    },
  },
-  methods: {
-    // 新規メモ登録の送信処理
-    async submit() {
-      //ログイン中のuserIdをformValue格納
-      this.formValue.userId = this.getUserId
-
-      //バックエンドへ送る内容を確認
-      console.log('this.formValue', this.formValue)
-
-      // axiosで新規登録処理
-      const response = await this.$axios.post(
-        `${this.$config.apiBaseUrl}/articles/add`,
-        {params:this.formValue},
-        { headers: {Authorization:this.getToken} },
-         )
-
-         console.log('サインアップAPI結果', response)
-
-      const responseCode = 200 // 404
-      if (responseCode === 200) {
-        // 成功
-        // トップにリダイレクト
-        this.$router.push('/')
-      } else {
-        // 失敗
-        // トースト表示
-        this.$toast.global.error({
-          message: '新規登録できませんでした。もう一度お試しください',
-        })
-      }
-    },
-  },
+  // methods: {
+  //   childEvent() {
+  //     this.$emit('parent-event',this.formValue)
+  //   },
+  //   // 新規メモ登録の送信処理
+  // },
 }
 </script>
 

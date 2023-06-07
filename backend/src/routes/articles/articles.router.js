@@ -74,7 +74,7 @@ router.delete('/delete',async (req, res, next) => {
     db.Articles.findOne({
       where: { id: memo_id }
     }).then(user => {
-      console.log(user)
+      // console.log(user)
       user.destroy();
     });
     res.status(200).json({});

@@ -10,7 +10,11 @@
         <ul class="indexLogin__table">
           <li class="indexLogin__table--list"  v-for="(item , index ) in items" :key="item.id">
             <p>{{ index + 1 }}</p>
-              <nuxt-link class="indexLogin__table--ttl" to="/edit">{{ item.title }}</nuxt-link>
+            <button class="indexLogin__table--ttl" @click="setEdit(index)">
+              <!-- <nuxt-link to="/edit" class="indexLogin__table--link"> -->
+                {{ item.title }}
+              <!-- </nuxt-link> -->
+            </button>
             <button class="indexLogin__table--del" @click="deleteMemo(item.id,index)">削除</button>
           </li>
         </ul>
@@ -46,13 +50,19 @@ export default {
   },
   methods:{
     //クリックされたボタンのメモを削除
-    async deleteMemo(memo_id,index){
+    async deleteMemo(item_id,index){
       // console.log(memo_id)
       const response = await this.$axios.$delete(
       `${this.$config.apiBaseUrl}/articles/delete`,
       { data: {
-        id:memo_id}})
+        id:item_id}})
         await this.$store.commit('auth/deleteUserMemo', index)
+    },
+    async setEdit(index){
+
+      await this.$store.commit('auth/setEdit', index)
+      this.$router.push('/edit')
+      
     },
   },
   //ユーザーメモの取得と保存
@@ -137,6 +147,11 @@ export default {
       height: 70px;
       padding-left: 10px;
       background: #D9D9D9;
+      border: none;
+    }
+    &--link{
+      display: block;
+      background: #000;
     }
     &--del{
       display: flex;

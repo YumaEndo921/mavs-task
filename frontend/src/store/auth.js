@@ -3,6 +3,7 @@ export const state = () => ({
   username: null,
   id:null,
   memo:null,
+  edit_id:null,
 })
 
 export const mutations = {
@@ -21,4 +22,13 @@ export const mutations = {
   deleteUserMemo(state, index) {
     state.memo.splice(index,1)
   },
+  setEdit(state, index) {
+    state.edit_id = index
+    console.log(`メモの配列番号を取得${state.edit_id}`)
+  },
+  resetEdit(state) {
+    state.edit_id = null
+  },
+  
+  
 }
