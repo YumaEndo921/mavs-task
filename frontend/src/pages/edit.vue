@@ -3,7 +3,7 @@
         <h2 class="edit__ttl">Memo Edit</h2>
         <!-- <inputMemo send="更新" class="edit__input" /> -->
         <div class="input">
-        <form class="input__form" @submit.prevent="resetEdit()">
+        <form class="input__form" @submit.prevent="updateEdit()">
             <div class="input__form--box">
                 <input 
                 class="input__form--ttl" 
@@ -44,7 +44,7 @@ export default{
       formValue: {
         title: '',
         content: '',
-        userId:'',
+        memo_id:'',
       },
     }
   },
@@ -58,18 +58,33 @@ export default{
     getMemo(){
         //クリックされたメモの配列番号を格納
         const memoNum = this.$store.state.auth.edit_id
-        //storeから特定のメモを呼び出して返す 使用するのはtitleとcontent
+        //memoNunが消えているときは空を返す
         if (memoNum === null){
             return ''
         }
+        //storeから特定のメモを呼び出して返す 使用するのはtitleとcontent
         return this.$store.state.auth.memo[memoNum]
     }
   },
   methods:{
     async resetEdit(){
+        //storeのメモ配列番号をリセット
         await this.$store.commit('auth/resetEdit')
+        //トップにリダイレクト
         this.$router.push('/')
-        }
+        },
+
+    async updateEdit(){
+        this.formValue.memo_id = await this.getMemo.id
+        const response = await this.$axios.$put(
+      `${this.$config.apiBaseUrl}/articles/update`,
+        this.formValue)
+
+        //storeのメモ配列番号をリセット
+        await this.$store.commit('auth/resetEdit')
+        //トップにリダイレクト
+        this.$router.push('/')
+        },
     }
 }
 </script>

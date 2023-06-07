@@ -54,7 +54,7 @@ export default {
         },
     },
     methods:{
-        async submit() {
+      async submit() {
       //ログイン中のuserIdをformValue格納
       this.formValue.userId = this.getUserId
 

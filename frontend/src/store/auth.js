@@ -24,7 +24,6 @@ export const mutations = {
   },
   setEdit(state, index) {
     state.edit_id = index
-    console.log(`メモの配列番号を取得${state.edit_id}`)
   },
   resetEdit(state) {
     state.edit_id = null
