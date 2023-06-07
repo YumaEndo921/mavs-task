@@ -18,4 +18,7 @@ export const mutations = {
   setUserMemo(state, memo) {
     state.memo = memo
   },
+  deleteUserMemo(state, index) {
+    state.memo.splice(index,1)
+  },
 }

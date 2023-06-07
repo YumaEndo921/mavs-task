@@ -8,9 +8,10 @@
           <nuxt-link class="indexLogin__box--button" to="/add">新規作成</nuxt-link>
         </div>
         <ul class="indexLogin__table">
-          <li class="indexLogin__table--list"  v-for="item in items" :key="item.id">
+          <li class="indexLogin__table--list"  v-for="(item , index ) in items" :key="item.id">
+            <p>{{ index + 1 }}</p>
               <nuxt-link class="indexLogin__table--ttl" to="/edit">{{ item.title }}</nuxt-link>
-            <div class="indexLogin__table--del">削除</div>
+            <button class="indexLogin__table--del" @click="deleteMemo(item.id,index)">削除</button>
           </li>
         </ul>
         <!-- <p>{{ posts }}</p> -->
@@ -38,12 +39,24 @@ export default {
     getUserId(){
     return this.$store.state.auth.id
    },
+   //storeのユーザーメモ情報を変数化（配列）
     items() {
     return this.$store.state.auth.memo
   }
   },
+  methods:{
+    //クリックされたボタンのメモを削除
+    async deleteMemo(memo_id,index){
+      // console.log(memo_id)
+      const response = await this.$axios.$delete(
+      `${this.$config.apiBaseUrl}/articles/delete`,
+      { data: {
+        id:memo_id}})
+        await this.$store.commit('auth/deleteUserMemo', index)
+    },
+  },
+  //ユーザーメモの取得と保存
   async fetch() {
-    //     // メモ情報の取得
     try {
     const response = await this.$axios.$post(
       `${this.$config.apiBaseUrl}/articles/get`,
@@ -51,13 +64,10 @@ export default {
     await this.$store.commit('auth/setUserMemo', response.body)
   } 
     catch (error) {
-    // エラーメッセージの表示やログ出力など、エラー処理を行う
     // console.error('APIリクエストエラー:', error)
-    // 必要に応じてユーザーにエラーメッセージを表示するなどの処理を追加
     return
   }
   }
-
 }
 </script>
 
@@ -135,6 +145,7 @@ export default {
       width: 123px;
       height: 66px;
       background: #8E8E8E;
+      border: none;
       border-radius:5px;
     }
 

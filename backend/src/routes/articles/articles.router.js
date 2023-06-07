@@ -35,7 +35,7 @@ router.post('/get',async (req, res, next) => {
 
   try {
     
-    console.log("axiosリクエストを受け取りました。");
+    // console.log("axiosリクエストを受け取りました。");
   // console.log(req.body.params)  //ログイン中のユーザーidをフロントから受け取る
 
   const user_id = req.body.params;
@@ -59,6 +59,26 @@ router.post('/get',async (req, res, next) => {
   const body = articleData;
 
     res.status(200).json({body});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
+router.delete('/delete',async (req, res, next) => {
+  try {
+    // console.log("deleteリクエストを受け取りました。");
+    // console.log(req.body.id)  //ログイン中のユーザーidをフロントから受け取る
+    const memo_id = req.body.id
+  
+    db.Articles.findOne({
+      where: { id: memo_id }
+    }).then(user => {
+      console.log(user)
+      user.destroy();
+    });
+    res.status(200).json({});
+
   } catch (error) {
     console.error(error);
     res.status(500).json({});
