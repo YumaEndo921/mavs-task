@@ -1,14 +1,14 @@
 <template>
     <div class="add">
         <h2 class="add__ttl">Memo Add</h2>
-            <!-- <inputMemo send="保存" class="add__input" @parent-event="submit" /> -->
-            <div class="input">
+        <div class="input">
         <form class="input__form" @submit.prevent="submit">
             <div class="input__form--box">
                 <input 
                 class="input__form--ttl" 
                 type="text" 
                 placeholder="タイトル"
+                name="title"
                 :value="formValue.title"
                 @input="formValue.title = $event.target.value">
             </div>
@@ -55,6 +55,12 @@ export default {
     },
     methods:{
       async submit() {
+      if(this.formValue.title === ''){
+          this.$toast.global.error({
+          message: 'タイトルを入力してください。',
+        })
+        return
+        }
       //ログイン中のuserIdをformValue格納
       this.formValue.userId = this.getUserId
 

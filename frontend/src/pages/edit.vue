@@ -9,7 +9,7 @@
                 class="input__form--ttl" 
                 type="text" 
                 placeholder="タイトル"
-                :value="getMemo.title"
+                :value="formValue.title"
                 @input="formValue.title = $event.target.value">
             </div>
             <div class="input__form--box">
@@ -63,7 +63,10 @@ export default{
             return ''
         }
         //storeから特定のメモを呼び出して返す 使用するのはtitleとcontent
-        return this.$store.state.auth.memo[memoNum]
+        // return this.$store.state.auth.memo[memoNum]
+        const memo = this.$store.state.auth.memo[memoNum]
+        this.formValue.title = memo.title // titleプロパティの値を設定
+        return memo
     }
   },
   methods:{
@@ -75,9 +78,15 @@ export default{
         },
 
     async updateEdit(){
+        if(this.formValue.title === ''){
+          this.$toast.global.error({
+          message: 'タイトルを入力してください。',
+        })
+        return
+        }
         this.formValue.memo_id = await this.getMemo.id
         const response = await this.$axios.$put(
-      `${this.$config.apiBaseUrl}/articles/update`,
+        `${this.$config.apiBaseUrl}/articles/update`,
         this.formValue)
 
         //storeのメモ配列番号をリセット

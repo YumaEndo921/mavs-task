@@ -59,7 +59,7 @@
           rules="required|confirmed:password"
           name="passwordConfirm"
         >
-          <div class="-password">
+          <div class="-passwordcheck">
             <input
               id="passwordConfirm"
               type="password"
@@ -111,20 +111,19 @@ export default {
       const response = await this.$axios.post(
         `${this.$config.apiBaseUrl}/users/signup`,
          this.formValue)
-         console.log('サインアップAPI結果', response)
+        //  console.log('サインアップAPI結果', response)
 
-      const responseCode = 200 // 404
+      const responseCode = response.data.body
       if (responseCode === 200) {
         // 成功
-
+        console.log("登録成功")
         // サインインページにリダイレクト
         this.$router.push('/signin')
       } else {
         // 失敗
-
         // トースト表示
         this.$toast.global.error({
-          message: '新規登録できませんでした。もう一度お試しください',
+          message: 'すでに登録されているメールアドレスです。',
         })
       }
     },
@@ -141,7 +140,7 @@ export default {
     font-weight: normal;
   }
 }
-.-email{
+.-username{
   padding-bottom: 10px;
 }
 .-email{
@@ -149,6 +148,9 @@ export default {
 }
 .-password{
   padding-bottom: 10px;
+}
+.-passwordcheck{
+  margin-bottom: 50px;
 }
 .error {
   color: #ff0000;

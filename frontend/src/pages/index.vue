@@ -109,6 +109,7 @@ export default {
 }
 //ログイン後のcss
 .indexLogin{
+  
   &__ttl{
     padding-bottom: 62px;
     text-align: center;

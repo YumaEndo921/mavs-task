@@ -20,7 +20,6 @@
 <script>
 export default {
   name: 'AppHeader',
-  
   computed: {
     // Tokenの有無でログインしているかどうかを判断
     isLogin() {
@@ -38,6 +37,12 @@ export default {
       this.$store.commit('auth/setUsername', null)
     },
   },
+  // pageReload(){
+  //   if( this.isLogin === false ){
+  //     this.$router.push('/')
+  //     console.log("読み込まれてるのか")
+  //   }
+  // },
 }
 </script>
 
@@ -47,7 +52,7 @@ export default {
   display: flex;
   justify-content: space-between;
   align-content: center;
-  padding-bottom: 216px; //ログイン後値を変更
+  padding-bottom: 150px; //ログイン後値を変更
   font-size: 24px;
   &__ttl{
     padding-top: 30px;
