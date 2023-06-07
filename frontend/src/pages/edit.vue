@@ -3,13 +3,13 @@
         <h2 class="edit__ttl">Memo Edit</h2>
         <!-- <inputMemo send="更新" class="edit__input" /> -->
         <div class="input">
-        <form class="input__form" @submit.prevent="childEvent">
+        <form class="input__form" @submit.prevent="resetEdit()">
             <div class="input__form--box">
                 <input 
                 class="input__form--ttl" 
                 type="text" 
                 placeholder="タイトル"
-                :value="formValue.title"
+                :value="getMemo.title"
                 @input="formValue.title = $event.target.value">
             </div>
             <div class="input__form--box">
@@ -19,7 +19,7 @@
                 id="" 
                 cols="30" 
                 rows="10"
-                :value="formValue.content"
+                :value="getMemo.content"
                 @input="formValue.content = $event.target.value">
                 </textarea>
             </div>
@@ -39,10 +39,36 @@
 <script>
 
 export default{
-    methods:{
-        async resetEdit(){
-            await this.$store.commit('auth/resetEdit')
-            this.$router.push('/')
+    data() {
+    return {
+      formValue: {
+        title: '',
+        content: '',
+        userId:'',
+      },
+    }
+  },
+  computed: {
+    getToken () {
+        return this.$store.state.auth.token
+    },
+    getUserId(){
+        return this.$store.state.auth.id
+    },
+    getMemo(){
+        //クリックされたメモの配列番号を格納
+        const memoNum = this.$store.state.auth.edit_id
+        //storeから特定のメモを呼び出して返す 使用するのはtitleとcontent
+        if (memoNum === null){
+            return ''
+        }
+        return this.$store.state.auth.memo[memoNum]
+    }
+  },
+  methods:{
+    async resetEdit(){
+        await this.$store.commit('auth/resetEdit')
+        this.$router.push('/')
         }
     }
 }

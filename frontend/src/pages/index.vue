@@ -59,10 +59,11 @@ export default {
         await this.$store.commit('auth/deleteUserMemo', index)
     },
     async setEdit(index){
-
+      //クリックされた行のindexをstoreに保存
       await this.$store.commit('auth/setEdit', index)
+
+      //editページへ
       this.$router.push('/edit')
-      
     },
   },
   //ユーザーメモの取得と保存
