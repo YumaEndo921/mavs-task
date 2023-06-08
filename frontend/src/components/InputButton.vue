@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="input">
      <div class="input__form--box">
        <button class="input__form--btn" type="submit" >{{ buttonName }}</button>
      </div>
@@ -8,14 +8,10 @@
  
  <script>
  export default {
-   props:
-   {
+   props:{
      buttonName:{
        type:String
      },
-     value:{
-       type:String
-     }
    } ,
  }
  </script>
@@ -23,36 +19,14 @@
  <style lang="scss" scoped>
  
  .input{
-     // margin: 0 15%;
+     width: 100%;
      &__form{
-         display: flex;
-         flex-direction: column;
-         // justify-content: start;
-         align-items: flex-start;
-         
-         &--box{
-             width: 100%;
-             &:nth-of-type(3){
-                 display: flex;
-                 justify-content: center;
-             }
-         }
-         &--ttl{
-             width: 387px;
-             height: 66px;
-             margin-bottom: 53px;
-             padding-left: 20px;
-             font-size: 24px;
-         }
-         &--txt{
-             width: 1025px;
-             height: 276px;
-             margin-bottom: 34px;
-             padding-top: 20px;
-             padding-left: 20px;
+        &--box{
+            display: flex;
+            justify-content: center;
          }
          &--btn{
-         text-align: center;
+            text-align: center;
              display: flex;
              justify-content: center;
              align-items: center;
