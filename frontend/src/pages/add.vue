@@ -46,31 +46,36 @@ export default {
     }
   },
     computed:{
+        // トークンをstoreから取得
         getToken () {
             return this.$store.state.auth.token
         },
+        // ログイン中のユーザーidをstoreから取得
         getUserId(){
             return this.$store.state.auth.id
         },
     },
     methods:{
       async submit() {
+      //タイトルの入力確認
       if(this.formValue.title === ''){
           this.$toast.global.error({
           message: 'タイトルを入力してください。',
         })
         return
         }
+
       //ログイン中のuserIdをformValue格納
       this.formValue.userId = this.getUserId
-
-      // axiosで新規登録処理
+      // バックエンドへAPIリクエスト
       const response = await this.$axios.post(
         `${this.$config.apiBaseUrl}/articles/add`,
+        //入力された情報とユーザーidを渡す
         {params:this.formValue},
+        //ヘッダーリクエストにトークン認証を渡す
         { headers: {Authorization:this.getToken} })
-
-      const responseCode = 200 // 404
+      //バックエンドからのresを格納
+      const responseCode = response.data.body
       if (responseCode === 200) {
         // 成功
         // トップにリダイレクト
@@ -84,12 +89,6 @@ export default {
       }
     },
     },
-
-//   computed: {
-//    getToken () {
-//      return this.$store.state
-//    }
-//  },
 }
 </script>
 

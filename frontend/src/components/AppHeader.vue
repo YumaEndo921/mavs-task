@@ -25,6 +25,7 @@ export default {
     isLogin() {
       return !!this.$store.state.auth.token
     },
+    //storeからユーザーネーム（メールアドレス）を取得
     username() {
       return this.$store.state.auth.username
     },
@@ -37,12 +38,6 @@ export default {
       this.$store.commit('auth/setUsername', null)
     },
   },
-  // pageReload(){
-  //   if( this.isLogin === false ){
-  //     this.$router.push('/')
-  //     console.log("読み込まれてるのか")
-  //   }
-  // },
 }
 </script>
 

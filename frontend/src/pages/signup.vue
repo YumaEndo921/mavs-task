@@ -105,15 +105,11 @@ export default {
   methods: {
     // 新規登録の送信処理
     async submit() {
-      console.log('this.formValue', this.formValue)
-
-      // axiosで新規登録処理
-      // await this.$axios.post('新規登録用API', this.formValue)
+      // バックエンドへAPIリクエスト
       const response = await this.$axios.post(
         `${this.$config.apiBaseUrl}/users/signup`,
          this.formValue)
-        //  console.log('サインアップAPI結果', response)
-
+      //バックエンドからのデータを格納
       const responseCode = response.data.body
       if (responseCode === 200) {
         // 成功

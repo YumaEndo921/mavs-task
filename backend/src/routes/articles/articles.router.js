@@ -21,7 +21,8 @@ router.post('/add', authenticate, async (req, res, next) => {
       content: contents,
       author_id: user_id,    
     });
-    res.status(200).json({});
+    const body = 200
+    res.status(200).json({body})
   } catch (error) {
     console.error(error);
     res.status(500).json({});

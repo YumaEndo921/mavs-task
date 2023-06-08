@@ -1,10 +1,9 @@
 <template>
     <div class="edit">
         <h2 class="edit__ttl">Memo Edit</h2>
-        <!-- <inputMemo send="更新" class="edit__input" /> -->
         <div class="input">
-        <!-- <p >{{ formValue }}</p> -->
-        <form class="input__form" @submit.prevent="updateEdit()">
+            <form class="input__form" @submit.prevent="updateEdit()">
+                <!-- <inputMemo send="更新" class="edit__input" /> -->
             <div class="input__form--box">
                 <input 
                 class="input__form--ttl" 
@@ -40,6 +39,7 @@
 export default{
     data() {
     return {
+      //getMemoで上書きされる
       formValue: {
         title: '',
         content: '',
@@ -48,12 +48,15 @@ export default{
     }
   },
   computed: {
+    // トークンをstoreから取得
     getToken () {
         return this.$store.state.auth.token
     },
+    // ログイン中のユーザーidをstoreから取得
     getUserId(){
         return this.$store.state.auth.id
     },
+    //クリックされたメモ内容でformValueを更新
     getMemo(){
         //クリックされたメモの配列番号を格納
         const memoNum = this.$store.state.auth.edit_id
@@ -61,8 +64,7 @@ export default{
         if (memoNum === null){
             return ''
         }
-        //storeから特定のメモを呼び出して返す 使用するのはtitleとcontent
-        // return this.$store.state.auth.memo[memoNum]
+        //storeから特定のメモを呼び出して格納
         const memo = this.$store.state.auth.memo[memoNum]
         this.formValue.title = memo.title // titleプロパティの値を設定
         this.formValue.content = memo.content // contentプロパティの値を設定
@@ -70,25 +72,27 @@ export default{
     }
   },
   methods:{
+    //戻るボタンの処理
     async resetEdit(){
         //storeのメモ配列番号をリセット
         await this.$store.commit('auth/resetEdit')
         //トップにリダイレクト
         this.$router.push('/')
         },
-
+    //更新ボタンの処理
     async updateEdit(){
+        //タイトルがからの場合エラー
         if(this.formValue.title === ''){
           this.$toast.global.error({
           message: 'タイトルを入力してください。',
         })
         return
         }
+        //バックエンドにAPIリクエスト
         this.formValue.memo_id = await this.getMemo.id
         const response = await this.$axios.$put(
         `${this.$config.apiBaseUrl}/articles/update`,
         this.formValue)
-
         //storeのメモ配列番号をリセット
         await this.$store.commit('auth/resetEdit')
         //トップにリダイレクト

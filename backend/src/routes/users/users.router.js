@@ -30,7 +30,10 @@ router.post('/signup', async (req, res, next) => {
         password: hash_password,
       });
       console.log("データベースに追加しました")
+      const body = 200
+      res.status(200).json({body})
       }
+
       //重複した情報がある場合処理を終了
       else{
         res.status(200).json({})

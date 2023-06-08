@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+
     <!-- ログイン中 -->
       <div v-if="isLogin" class="indexLogin">
         <h2 class="indexLogin__ttl">Memo List</h2>
@@ -172,7 +172,6 @@ export default {
       border: none;
       border-radius:5px;
     }
-
   }
 }
 
