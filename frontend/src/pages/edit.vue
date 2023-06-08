@@ -3,8 +3,10 @@
         <h2 class="edit__ttl">Memo Edit</h2>
         <div class="input">
             <form class="input__form" @submit.prevent="updateEdit()">
-                <!-- <inputMemo send="更新" class="edit__input" /> -->
-            <div class="input__form--box">
+                <InputTitle  v-model="formValue.title" />
+                <Content  v-model="formValue.content" />
+                <InputButton buttonName="更新" />
+            <!-- <div class="input__form--box">
                 <input 
                 class="input__form--ttl" 
                 type="text" 
@@ -25,13 +27,13 @@
             </div>
             <div class="input__form--box">
                 <button class="input__form--btn" type="submit">更新</button>
-            </div>
+            </div> -->
         </form>
     </div>
         <button class="edit__box" @click="resetEdit()">
             戻る
         </button>
-        <p>{{ getMemo.content }}</p>
+        <!-- <p>{{ getMemo }}</p> -->
     </div>
 </template>
 <script>
@@ -44,7 +46,7 @@ export default{
         title: '',
         content: '',
         memo_id:'',
-      },
+      }
     }
   },
   computed: {
@@ -60,16 +62,28 @@ export default{
     getMemo(){
         //クリックされたメモの配列番号を格納
         const memoNum = this.$store.state.auth.edit_id
-        //memoNunが消えているときは空を返す
+        //memoNumが消えているときは空を返す
         if (memoNum === null){
             return ''
         }
         //storeから特定のメモを呼び出して格納
         const memo = this.$store.state.auth.memo[memoNum]
-        this.formValue.title = memo.title // titleプロパティの値を設定
-        this.formValue.content = memo.content // contentプロパティの値を設定
+        // this.formValue.title = memo.title // titleプロパティの値を設定
+        // this.formValue.content = memo.content // contentプロパティの値を設定
         return memo
     }
+  },
+  fetch(){
+    //クリックされたメモの配列番号を格納
+    const memoNum = this.$store.state.auth.edit_id
+    //memoNunが消えているときは空を返す
+    if (memoNum === null){
+        return 
+    }
+    //storeから特定のメモを呼び出して格納
+    const memo = this.$store.state.auth.memo[memoNum]
+    this.formValue.title = memo.title // titleプロパティの値を設定
+    this.formValue.content = memo.content // contentプロパティの値を設定
   },
   methods:{
     //戻るボタンの処理

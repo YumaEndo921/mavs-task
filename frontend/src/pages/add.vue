@@ -3,7 +3,10 @@
         <h2 class="add__ttl">Memo Add</h2>
         <div class="input">
         <form class="input__form" @submit.prevent="submit">
-            <div class="input__form--box">
+            <InputTitle  v-model="formValue.title" />
+            <Content  v-model="formValue.content" />
+            <InputButton buttonName="更新" />
+            <!-- <div class="input__form--box">
                 <input 
                 class="input__form--ttl" 
                 type="text" 
@@ -25,7 +28,7 @@
             </div>
             <div class="input__form--box">
                 <button class="input__form--btn" type="submit">保存</button>
-            </div>
+            </div> -->
         </form>
         </div>
         <div class="add__box">

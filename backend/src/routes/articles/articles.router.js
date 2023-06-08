@@ -55,8 +55,7 @@ router.delete('/delete',async (req, res, next) => {
     //渡されたメモidを定義
     const article_id = req.body.id
     //データベースから該当のメモ情報を取得し削除
-    await articleservice.getArticleList(article_id) 
-
+    await articleservice.deleteArticle(article_id) 
     res.status(200).json({});
   } catch (error) {
     console.error(error);
