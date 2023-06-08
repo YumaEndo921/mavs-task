@@ -109,11 +109,12 @@ export default {
   padding-bottom: 10px;
 }
 .-password{
-  padding-bottom: 64px;
+  padding-bottom: 10px;
 }
 .-submit{
   width: 240px;
   height: 60px;
+  margin-top: 54px;
   font-size: 24px;
 }
 button{

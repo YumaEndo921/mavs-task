@@ -3,6 +3,7 @@
         <h2 class="edit__ttl">Memo Edit</h2>
         <!-- <inputMemo send="更新" class="edit__input" /> -->
         <div class="input">
+        <!-- <p >{{ formValue }}</p> -->
         <form class="input__form" @submit.prevent="updateEdit()">
             <div class="input__form--box">
                 <input 
@@ -19,7 +20,7 @@
                 id="" 
                 cols="30" 
                 rows="10"
-                :value="getMemo.content"
+                :value="formValue.content"
                 @input="formValue.content = $event.target.value">
                 </textarea>
             </div>
@@ -29,11 +30,9 @@
         </form>
     </div>
         <button class="edit__box" @click="resetEdit()">
-        <!-- <nuxt-link class="edit__back"  to="/edit"> -->
             戻る
-        <!-- </nuxt-link> -->
         </button>
-        
+        <p>{{ getMemo.content }}</p>
     </div>
 </template>
 <script>
@@ -66,6 +65,7 @@ export default{
         // return this.$store.state.auth.memo[memoNum]
         const memo = this.$store.state.auth.memo[memoNum]
         this.formValue.title = memo.title // titleプロパティの値を設定
+        this.formValue.content = memo.content // contentプロパティの値を設定
         return memo
     }
   },

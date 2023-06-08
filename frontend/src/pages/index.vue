@@ -7,19 +7,20 @@
         <div class="indexLogin__box">
           <nuxt-link class="indexLogin__box--button" to="/add">新規作成</nuxt-link>
         </div>
+
+        <!-- ユーザーメモリスト -->
         <ul class="indexLogin__table">
           <li class="indexLogin__table--list"  v-for="(item , index ) in items" :key="item.id">
+            <!-- インデックス番号(配列番号+1) -->
             <p>{{ index + 1 }}</p>
-            <button class="indexLogin__table--ttl" @click="setEdit(index)">
-              <!-- <nuxt-link to="/edit" class="indexLogin__table--link"> -->
-                {{ item.title }}
-              <!-- </nuxt-link> -->
-            </button>
+            <!-- タイトルの表示 -->
+            <button class="indexLogin__table--ttl" @click="setEdit(index)">{{ item.title }}</button>
+            <!-- 削除ボタン -->
             <button class="indexLogin__table--del" @click="deleteMemo(item.id,index)">削除</button>
           </li>
         </ul>
-        <!-- <p>{{ posts }}</p> -->
       </div>
+
     <!-- ログイン前 -->
       <div v-else class="index">
         <h2 class="index__ttl">Memo App</h2>
@@ -28,6 +29,7 @@
           <nuxt-link class="index__box--button" to="/signup">新規登録</nuxt-link>
         </div>
       </div>
+
   </div>
 </template>
 
@@ -40,44 +42,49 @@ export default {
     isLogin() {
       return !!this.$store.state.auth.token
     },
+    // ログイン中のユーザーidをstoreから取得
     getUserId(){
     return this.$store.state.auth.id
    },
-   //storeのユーザーメモ情報を変数化（配列）
+   // storeのユーザーメモ情報を変数化（配列）
     items() {
     return this.$store.state.auth.memo
   }
   },
   methods:{
     //クリックされたボタンのメモを削除
-    async deleteMemo(item_id,index){
-      // console.log(memo_id)
+      async deleteMemo(item_id,index){
+      //APIリクエストをバックエンド側へ送信
       const response = await this.$axios.$delete(
       `${this.$config.apiBaseUrl}/articles/delete`,
+      //クリックされた行のメモidを渡す
       { data: {
         id:item_id}})
-        await this.$store.commit('auth/deleteUserMemo', index)
+      //storeのメモ情報を削除
+      await this.$store.commit('auth/deleteUserMemo', index)
     },
-    async setEdit(index){
-      //クリックされた行のindexをstoreに保存
+    //クリックされたメモのidをstoreに保存
+      async setEdit(index){
       await this.$store.commit('auth/setEdit', index)
-
-      //editページへ
+      //editページへ遷移
       this.$router.push('/edit')
     },
   },
-  //ユーザーメモの取得と保存
-  async fetch() {
-    try {
-    const response = await this.$axios.$post(
+  //ユーザーメモ情報の取得と保存
+    async fetch() {
+      try {
+      //APIリクエストをバックエンド側へ送信
+      const response = await this.$axios.$post(
       `${this.$config.apiBaseUrl}/articles/get`,
+      //userのidを渡す
       { params: this.getUserId })
-    await this.$store.commit('auth/setUserMemo', response.body)
-  } 
+
+      await this.$store.commit('auth/setUserMemo', response.body)
+    } 
+    //メモ情報がなければ処理を終了
     catch (error) {
-    // console.error('APIリクエストエラー:', error)
-    return
-  }
+      return
+    }
   }
 }
 </script>
@@ -121,7 +128,7 @@ export default {
     justify-content: center;
     align-items: center;
     gap:50px;
-    padding-bottom: 117px;
+    padding-bottom: 80px;
     text-align: center;
     &--button{
       width: 240px;

@@ -11,21 +11,18 @@ const userService = new UserService();
  * ユーザー新規登録
  */
 router.post('/signup', async (req, res, next) => {  
-
-  
   try {
+    //フロントから受け取った情報を格納
     const {username, email, password } = req.body;
+    //パスワードをハッシュ化
     const hash_password = authService.hashSha256(password)
-    // console.log(hash_password)
-
     //メールアドレス重複チェック
-    db.Users.findOne({
+      //データベース内にemai情報があるかチェック
+      db.Users.findOne({
       where: { email: email }
-    }).then(user => {
-      // console.log(user)
+      }).then(user => {
+      //同じ情報がない場合処理を継続
       if(user == null){
-        const body = 200
-        res.status(200).json({body});
         // ユーザー情報追加
         const newUser = db.Users.create({
         name: username,
@@ -34,6 +31,7 @@ router.post('/signup', async (req, res, next) => {
       });
       console.log("データベースに追加しました")
       }
+      //重複した情報がある場合処理を終了
       else{
         res.status(200).json({})
         return

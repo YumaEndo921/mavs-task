@@ -64,16 +64,11 @@ export default {
       //ログイン中のuserIdをformValue格納
       this.formValue.userId = this.getUserId
 
-      //バックエンドへ送る内容を確認
-      console.log('this.formValue', this.formValue)
-
       // axiosで新規登録処理
       const response = await this.$axios.post(
         `${this.$config.apiBaseUrl}/articles/add`,
         {params:this.formValue},
         { headers: {Authorization:this.getToken} })
-
-         console.log('サインアップAPI結果', response)
 
       const responseCode = 200 // 404
       if (responseCode === 200) {

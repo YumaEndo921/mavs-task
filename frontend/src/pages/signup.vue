@@ -72,6 +72,7 @@
           <div class="error">{{ errors[0] }}</div>
         </ValidationProvider>
         <button
+          class="-submit"
           type="submit"
           :disabled="
             !formValue.username ||
@@ -150,9 +151,20 @@ export default {
   padding-bottom: 10px;
 }
 .-passwordcheck{
-  margin-bottom: 50px;
+  margin-bottom: 10px;
+}
+.-submit{
+  width: 240px;
+  height: 60px;
+  margin-top: 50px;
+  font-size: 24px;
+  border: none;
 }
 .error {
+  margin-bottom: 10px;
   color: #ff0000;
+}
+input{
+  width: 240px;
 }
 </style>
