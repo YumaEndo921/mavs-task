@@ -3,7 +3,7 @@
         <h2 class="edit__ttl">Memo Edit</h2>
         <form class="edit__form" @submit.prevent="updateEdit()">
             <InputTitle  v-model="formValue.title" />
-            <Content  v-model="formValue.content" />
+            <InputContent  v-model="formValue.content" />
             <InputButton buttonName="更新" />
         </form>
         <button class="edit__box" @click="resetEdit()">
