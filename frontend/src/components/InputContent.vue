@@ -40,7 +40,6 @@
  </script>
  
  <style lang="scss" scoped>
- 
  .input{
      &__form{
          display: flex;
@@ -54,12 +53,15 @@
              }
          }
          &--txt{
-             width: 1025px;
+          @media screen and (min-width: 1024px) {
+            width: 1100px;
+        }
+             width: 768px;
              height: 276px;
              margin-bottom: 34px;
              padding-top: 20px;
              padding-left: 20px;
-         }
+            }
      }
  }
  </style>

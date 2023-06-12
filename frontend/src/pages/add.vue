@@ -72,6 +72,9 @@ export default {
 
 <style lang="scss" scoped>
 .add{
+    @media screen and (max-width: 480px) {
+      background-color: black;
+    }
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -81,6 +84,7 @@ export default {
         font-size: 64px;
     }
     &__form{
+        // width: 85%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -99,4 +103,6 @@ export default {
         border-radius: 5px;
     }
 }
+
+
 </style>

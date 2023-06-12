@@ -79,6 +79,7 @@ export default{
 
 <style lang="scss" scoped>
 .edit{
+
     display: flex;
     flex-direction: column;
     align-items: center;
