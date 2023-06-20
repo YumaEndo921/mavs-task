@@ -24,11 +24,13 @@ const createModel = (sequelize, DataTypes) => {
       author_id: DataTypes.STRING,
       created_at: DataTypes.DATE,
       updated_at: DataTypes.DATE,
+      deleted_at:  DataTypes.DATE,
     },
     {
       sequelize,
       modelName: 'articles',
       underscored: true,
+      paranoid: true,
     }
   );
   return articles;

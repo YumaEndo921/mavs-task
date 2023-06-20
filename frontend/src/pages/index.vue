@@ -7,6 +7,7 @@
         <nuxt-link class="indexLogin__box--button" to="/add"
           >新規作成</nuxt-link
         >
+        <nuxt-link class="" to="/delete">削除したメモ</nuxt-link>
       </div>
 
       <!-- ユーザーメモリスト -->
@@ -96,7 +97,8 @@ export default {
         //userのidを渡す
         { params: this.getUserId }
       )
-
+      console.log(`取得したユーザーメモ情報です：${response.body}`)
+      //storeにメモ情報を保存
       await this.$store.commit('auth/setUserMemo', response.body)
     } catch (error) {
       //メモ情報がなければ処理を終了
