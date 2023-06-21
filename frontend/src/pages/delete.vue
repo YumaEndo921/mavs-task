@@ -14,7 +14,9 @@
           {{ item.title }}
         </button>
         <!-- 削除ボタン -->
-        <button class="delete__table--del">削除</button>
+        <button class="delete__table--del" @click="destroy(item, index)">
+          削除
+        </button>
       </li>
     </ul>
     <!-- <button class="delete__box"> -->
@@ -59,6 +61,26 @@ export default {
         console.log('復元しました')
       } else {
         console.log('復元を中止します')
+      }
+    },
+    async destroy(item, index) {
+      const result = window.confirm(`"${item.title}" を完全に削除しますか？`)
+      if (result) {
+        try {
+          //APIリクエストをバックエンド側へ送信
+          const response = await this.$axios.$post(
+            `${this.$config.apiBaseUrl}/articles/destroy`,
+            //削除されたメモ情報を渡す
+            { id: item.id }
+          )
+          //storeのdelete_memoを削除する
+          await this.$store.commit('auth/resetDeleteMemo', index)
+        } catch (error) {
+          return
+        }
+        console.log('完全に削除しました')
+      } else {
+        console.log('削除を中止します')
       }
     },
   },

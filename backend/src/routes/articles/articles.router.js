@@ -115,4 +115,19 @@ router.post('/restration', async (req, res, next) => {
   }
 });
 
+//メモを完全に削除
+router.post('/destroy', async (req, res, next) => {
+  // console.log(`リクエストを受け取りました:${req.body.id}`);
+  try {
+    //渡されたメモidを定義
+    const article_id = req.body.id;
+    //データベースから該当のメモ情報を取得し復元
+    await articleservice.destroyArticle(article_id);
+    res.status(200).json({});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
 export default router;

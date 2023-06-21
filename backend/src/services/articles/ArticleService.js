@@ -54,7 +54,7 @@ class ArticleService {
   }
 
   /**
-   * 記事情報取得・削除
+   * 記事情報復元
    * @param article_id
    */
   async restrationArticle(article_id) {
@@ -63,9 +63,26 @@ class ArticleService {
       where: { id: article_id },
       paranoid: false,
     })
-      //メモ情報を削除
+      //メモ情報を復元
       .then((user) => {
         user.restore();
+      });
+
+    return {};
+  }
+  /**
+   * 記事情報完全削除
+   * @param article_id
+   */
+  async destroyArticle(article_id) {
+    //渡されたidと一致するメモを抽出
+    db.Articles.destroy({
+      where: { id: article_id },
+      force: true,
+    })
+      //メモ情報を削除
+      .then(() => {
+        // user.destroy();
       });
     return {};
   }
