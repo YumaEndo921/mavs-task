@@ -97,7 +97,6 @@ export default {
         //userのidを渡す
         { params: this.getUserId }
       )
-      console.log(`取得したユーザーメモ情報です：${response.body}`)
       //storeにメモ情報を保存
       await this.$store.commit('auth/setUserMemo', response.body)
     } catch (error) {

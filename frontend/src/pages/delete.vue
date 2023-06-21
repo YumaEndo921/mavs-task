@@ -10,7 +10,7 @@
         <!-- インデックス番号(配列番号+1) -->
         <p>{{ index + 1 }}</p>
         <!-- タイトルの表示 -->
-        <button class="delete__table--ttl" @click="restration(item)">
+        <button class="delete__table--ttl" @click="restration(item, index)">
           {{ item.title }}
         </button>
         <!-- 削除ボタン -->
@@ -40,7 +40,7 @@ export default {
     },
   },
   methods: {
-    async restration(item) {
+    async restration(item, index) {
       const result = window.confirm(`"${item.title}" を復元しますか？`)
       //   console.log(item)
       if (result) {
@@ -51,11 +51,11 @@ export default {
             //削除されたメモ情報を渡す
             { id: item.id }
           )
+          //storeのdelete_memoを削除する
+          await this.$store.commit('auth/resetDeleteMemo', index)
         } catch (error) {
-          //メモ情報がなければ処理を終了
           return
         }
-
         console.log('復元しました')
       } else {
         console.log('復元を中止します')

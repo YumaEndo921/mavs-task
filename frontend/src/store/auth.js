@@ -1,10 +1,10 @@
 export const state = () => ({
   token: null,
   username: null,
-  id:null,
-  memo:null,
-  delete_memo:null,
-  edit_id:null,
+  id: null,
+  memo: null,
+  delete_memo: null,
+  edit_id: null,
 })
 
 export const mutations = {
@@ -23,13 +23,12 @@ export const mutations = {
   setDeleteMemo(state, delete_memo) {
     //初期化
     state.delete_memo = []
-    delete_memo.forEach(element => {
+    delete_memo.forEach((element) => {
       // console.log(`authのコンソールです:${element.deleted_at}`)
-      if(element.deleted_at == null){
+      if (element.deleted_at == null) {
         // console.log("if文をスキップします")
         return
-      }
-      else{
+      } else {
         // console.log("配列を追加しました")
         // console.log(element.deleted_at)
         state.delete_memo.push(element)
@@ -37,7 +36,10 @@ export const mutations = {
     })
   },
   deleteUserMemo(state, index) {
-    state.memo.splice(index,1)
+    state.memo.splice(index, 1)
+  },
+  resetDeleteMemo(state, index) {
+    state.delete_memo.splice(index, 1)
   },
   setEdit(state, index) {
     state.edit_id = index
@@ -45,6 +47,4 @@ export const mutations = {
   resetEdit(state) {
     state.edit_id = null
   },
-  
-  
 }
