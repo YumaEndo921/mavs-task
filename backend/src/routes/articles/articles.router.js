@@ -79,4 +79,25 @@ router.put('/update',async (req, res, next) => {
   }
 });
 
+//削除したユーザーメモの取得
+router.post('/restore',async (req, res, next) => {
+  try {
+    // 受け取ったユーザーIDを格納
+    const user_id = req.body.params;
+    // ユーザーIDとauthor_idが一致するデータを取得
+    const userMemo = await articleservice.getDeleteList(user_id) 
+    // 取り出したデータをdataValuesのみの配列にする
+    const articleData = userMemo.map((article)=>{
+      return article.dataValues
+    });
+    console.log(`restoreで受け取ったデータです${userMemo[0]}`);
+    //bodyにユーザーメモデータを格納し返却
+    const body = articleData;
+    res.status(200).json({body});
+    } catch (error) {
+    console.error(error);
+    res.status(500).json({});
+  }
+});
+
 export default router;
