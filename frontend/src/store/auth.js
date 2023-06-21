@@ -26,12 +26,12 @@ export const mutations = {
     delete_memo.forEach(element => {
       // console.log(`authのコンソールです:${element.deleted_at}`)
       if(element.deleted_at == null){
-        console.log("if文をスキップします")
+        // console.log("if文をスキップします")
         return
       }
       else{
-        console.log("配列を追加しました")
-        console.log(element.deleted_at)
+        // console.log("配列を追加しました")
+        // console.log(element.deleted_at)
         state.delete_memo.push(element)
       }
     })

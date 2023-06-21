@@ -10,13 +10,11 @@
         <!-- インデックス番号(配列番号+1) -->
         <p>{{ index + 1 }}</p>
         <!-- タイトルの表示 -->
-        <button class="delete__table--ttl" @click="setEdit(index)">
+        <button class="delete__table--ttl" @click="restration(item)">
           {{ item.title }}
         </button>
         <!-- 削除ボタン -->
-        <button class="delete__table--del" @click="deleteMemo(item.id, index)">
-          削除
-        </button>
+        <button class="delete__table--del">削除</button>
       </li>
     </ul>
     <!-- <button class="delete__box"> -->
@@ -41,6 +39,29 @@ export default {
       return this.$store.state.auth.delete_memo
     },
   },
+  methods: {
+    async restration(item) {
+      const result = window.confirm(`"${item.title}" を復元しますか？`)
+      //   console.log(item)
+      if (result) {
+        try {
+          //APIリクエストをバックエンド側へ送信
+          const response = await this.$axios.$post(
+            `${this.$config.apiBaseUrl}/articles/restration`,
+            //削除されたメモ情報を渡す
+            { id: item.id }
+          )
+        } catch (error) {
+          //メモ情報がなければ処理を終了
+          return
+        }
+
+        console.log('復元しました')
+      } else {
+        console.log('復元を中止します')
+      }
+    },
+  },
   async fetch() {
     try {
       //APIリクエストをバックエンド側へ送信
@@ -49,11 +70,6 @@ export default {
         //userのidを渡す
         { params: this.getUserId }
       )
-      //   console.log(
-      //     `deleteで取得したユーザーメモ情報です：${Object.values(
-      //       response.body[0]
-      //     )}`
-      //   )
       //storeに削除されたメモ情報のみを保存
       await this.$store.commit('auth/setDeleteMemo', response.body)
     } catch (error) {

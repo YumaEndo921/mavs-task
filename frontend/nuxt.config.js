@@ -87,6 +87,17 @@ export default {
           },
         },
       },
+      {
+        name: 'restration',
+        message: (payload) => payload.message,
+        options: {
+          type: 'success',
+          icon: (el) => {
+            el.innerHTML = '<span class="c-iconError"></span>'
+            return el
+          },
+        },
+      },
     ],
   },
 }

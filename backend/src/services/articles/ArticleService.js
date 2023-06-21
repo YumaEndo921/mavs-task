@@ -14,7 +14,7 @@ class ArticleService {
       where.author_id = user_id;
     }
     // 検索実行
-    const rows = await db.Articles.findAll({ where }); 
+    const rows = await db.Articles.findAll({ where });
     //データを返す
     return rows;
   }
@@ -31,7 +31,7 @@ class ArticleService {
       where.author_id = user_id;
     }
     // 検索実行
-    const rows = await db.Articles.findAll({ where,paranoid: false}); 
+    const rows = await db.Articles.findAll({ where, paranoid: false });
     //データを返す
     // console.log(rows);
     return rows;
@@ -44,29 +44,47 @@ class ArticleService {
   async deleteArticle(article_id) {
     //渡されたidと一致するメモを抽出
     db.Articles.findOne({
-      where: { id: article_id }})
-    //メモ情報を削除
-    .then(user => {
-      user.destroy();
-    });
+      where: { id: article_id },
+    })
+      //メモ情報を削除
+      .then((user) => {
+        user.destroy();
+      });
     return {};
   }
-  
+
+  /**
+   * 記事情報取得・削除
+   * @param article_id
+   */
+  async restrationArticle(article_id) {
+    //渡されたidと一致するメモを抽出
+    db.Articles.findOne({
+      where: { id: article_id },
+      paranoid: false,
+    })
+      //メモ情報を削除
+      .then((user) => {
+        user.restore();
+      });
+    return {};
+  }
+
   /**
    * メモの更新
    * @param {article_id,title,content}
    */
-  async updateArticle(article_id,title,content){
+  async updateArticle(article_id, title, content) {
     //渡されたidと一致するメモを抽出
     db.Articles.findOne({
-      where: { id: article_id}
+      where: { id: article_id },
     })
-    //メモ情報を更新
-    .then(user => {
-      user.title = title;
-      user.content = content;
-      user.save();
-    });
+      //メモ情報を更新
+      .then((user) => {
+        user.title = title;
+        user.content = content;
+        user.save();
+      });
   }
 }
 
